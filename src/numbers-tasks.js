@@ -220,8 +220,14 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (typeof +value === 'number') {
+    if (Number.isNaN(+value)) {
+      return def;
+    }
+    return +value;
+  }
+  return def;
 }
 
 /**
@@ -252,8 +258,25 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+
+function getFibonacciNumber(index) {
+  let n1 = 0;
+  let n2 = 1;
+  let res = 0;
+  if (index === 0) {
+    res = 0;
+  }
+  if (index === 1) {
+    res = 1;
+  }
+  if (index > 1) {
+    for (let i = 2; i <= index; i += 1) {
+      res = n1 + n2;
+      n1 = n2;
+      n2 = res;
+    }
+  }
+  return res;
 }
 
 /**
@@ -305,8 +328,12 @@ function getSumOfDigits(num) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  let res = num;
+  while (res > 2) {
+    res /= 2;
+  }
+  return res % 2 === 0;
 }
 
 /**
@@ -348,8 +375,8 @@ function numberToStringInBase(number, base) {
  * @example:
  * 12345, 2    => '1.23e+4'
  */
-function toExponential(/* number, fractionDigits */) {
-  throw new Error('Not implemented');
+function toExponential(number, fractionDigits) {
+  return number.toExponential(fractionDigits);
 }
 
 /**
@@ -363,8 +390,8 @@ function toExponential(/* number, fractionDigits */) {
  * 12345, 2    => '12345.00'
  * 12.345, 1   => '12.3'
  */
-function toFixed(/* number, fractionDigits */) {
-  throw new Error('Not implemented');
+function toFixed(number, fractionDigits) {
+  return number.toFixed(fractionDigits);
 }
 
 /**
